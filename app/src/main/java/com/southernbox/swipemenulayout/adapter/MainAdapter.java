@@ -43,6 +43,8 @@ public class MainAdapter extends RecyclerView.Adapter {
 
         final SwipeDeleteLayout layout = viewHolder.swipeDeleteLayout;
 
+        layout.close(false);
+
         viewHolder.tvName.setText(mList.get(position).getName());
 
         viewHolder.vDelete.setOnClickListener(new View.OnClickListener() {
@@ -102,12 +104,16 @@ public class MainAdapter extends RecyclerView.Adapter {
         for (SwipeDeleteLayout layout : mOpenItems) {
             layout.close();
         }
+        mOpenItems.clear();
     }
 
     public void closeAll(SwipeDeleteLayout unCloseLayout) {
         for (SwipeDeleteLayout layout : mOpenItems) {
             if (layout != unCloseLayout) {
                 layout.close();
+                if (mOpenItems.contains(layout)) {
+                    mOpenItems.remove(layout);
+                }
             }
         }
     }

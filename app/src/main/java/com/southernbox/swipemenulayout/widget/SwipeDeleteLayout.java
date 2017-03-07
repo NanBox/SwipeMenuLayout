@@ -83,7 +83,7 @@ public class SwipeDeleteLayout extends FrameLayout {
         }
     };
 
-    public enum State {
+    private enum State {
         CLOSE, OPEN, DRAGGING
     }
 
@@ -106,7 +106,6 @@ public class SwipeDeleteLayout extends FrameLayout {
 
     public void setOnDragStateChangeListener(OnDragStateChangeListener onDragStateChangeListener) {
         mOnDragStateChangeListener = onDragStateChangeListener;
-        close(false);
     }
 
     public SwipeDeleteLayout(Context context) {

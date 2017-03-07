@@ -127,14 +127,6 @@ public class SwipeMenuLayout extends FrameLayout {
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
-        //当前不是首页，不拦截
-//        if (MainPageTabHostAct.currentItemIndex != 0) {
-//            if (getStatus() != State.CLOSE) {
-//                close();
-//            }
-//            return false;
-//        }
-
         if (getStatus() == State.CLOSE) {
             switch (ev.getAction()) {
                 case MotionEvent.ACTION_DOWN: {
