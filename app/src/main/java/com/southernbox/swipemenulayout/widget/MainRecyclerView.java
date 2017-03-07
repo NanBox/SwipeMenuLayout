@@ -51,4 +51,13 @@ public class MainRecyclerView extends RecyclerView {
         }
         return super.onInterceptTouchEvent(e);
     }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent e) {
+        if (MainAdapter.mOpenItems.size() > 0) {
+            MainAdapter.closeAll();
+            return false;
+        }
+        return super.onTouchEvent(e);
+    }
 }

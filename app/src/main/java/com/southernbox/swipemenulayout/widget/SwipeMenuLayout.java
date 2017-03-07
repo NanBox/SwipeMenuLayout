@@ -105,7 +105,7 @@ public class SwipeMenuLayout extends FrameLayout {
     /**
      * 状态枚举
      */
-    public enum State {
+    private enum State {
         CLOSE, OPEN, DRAGGING
     }
 
@@ -147,14 +147,6 @@ public class SwipeMenuLayout extends FrameLayout {
                     }
                 }
                 break;
-//                case MotionEvent.ACTION_UP: {
-//                    float deltaX = ev.getRawX() - mDownX;
-//                    if (deltaX > 0 &&
-//                            MainAdapter.mOpenItems.size() > 0) {
-//                        MainAdapter.closeAll();
-//                    }
-//                }
-//                break;
             }
         } else if (getStatus() == State.OPEN) {
             //完全展开时并且点到主页面，拦截并关闭菜单
@@ -195,12 +187,6 @@ public class SwipeMenuLayout extends FrameLayout {
         super.onSizeChanged(w, h, oldw, oldh);
         mHeight = getMeasuredHeight();
         mWidth = getMeasuredWidth();
-//        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP &&
-//                Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-//            //4.4系统的顶部需要增加状态栏高度的padding
-//            mLeftContent.setPadding(0, getResources().getDimensionPixelSize(R.dimen.status_bar_height), 0, 0);
-//            mMainContent.setPadding(0, getResources().getDimensionPixelSize(R.dimen.status_bar_height), 0, 0);
-//        }
     }
 
     @Override
@@ -227,7 +213,6 @@ public class SwipeMenuLayout extends FrameLayout {
             long currentTime = System.currentTimeMillis();
             if (currentTime - lastRefreshTime > delayTime) {
                 lastRefreshTime = currentTime;
-//                RxBus.getInstance().post(BusEvent.MSG_SLIDING_MENU_OPEN, null);
             }
             return State.OPEN;
         } else {

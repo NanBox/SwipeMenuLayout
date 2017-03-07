@@ -38,7 +38,7 @@ public class MainAdapter extends RecyclerView.Adapter {
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
+    public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position) {
         ViewHolder viewHolder = (ViewHolder) holder;
 
         final SwipeDeleteLayout layout = viewHolder.swipeDeleteLayout;
@@ -50,6 +50,7 @@ public class MainAdapter extends RecyclerView.Adapter {
         viewHolder.vDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                int position = holder.getAdapterPosition();
                 mList.remove(position);
                 notifyItemRemoved(position);
                 if (position != mList.size()) {
@@ -107,7 +108,7 @@ public class MainAdapter extends RecyclerView.Adapter {
         mOpenItems.clear();
     }
 
-    public void closeAll(SwipeDeleteLayout unCloseLayout) {
+    private void closeAll(SwipeDeleteLayout unCloseLayout) {
         for (SwipeDeleteLayout layout : mOpenItems) {
             if (layout != unCloseLayout) {
                 layout.close();

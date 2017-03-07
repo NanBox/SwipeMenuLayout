@@ -2,13 +2,14 @@ package com.southernbox.swipemenulayout.widget;
 
 import android.content.Context;
 import android.graphics.Rect;
-import android.support.annotation.Nullable;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.widget.ViewDragHelper;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.FrameLayout;
+
+import com.southernbox.swipemenulayout.adapter.MainAdapter;
 
 /**
  * Created by nanquan.lin on 2016/8/9 0009.
@@ -134,12 +135,10 @@ public class SwipeDeleteLayout extends FrameLayout {
     }
 
     @Override
-    public boolean dispatchTouchEvent(MotionEvent ev) {
-        return super.dispatchTouchEvent(ev);
-    }
-
-    @Override
     public boolean onTouchEvent(MotionEvent event) {
+        if (MainAdapter.mOpenItems.size() > 0 && mState == State.CLOSE) {
+            return false;
+        }
         mDragHelper.processTouchEvent(event);
         return true;
     }
