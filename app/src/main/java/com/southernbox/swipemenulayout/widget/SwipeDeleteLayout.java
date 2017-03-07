@@ -13,7 +13,7 @@ import android.widget.FrameLayout;
  * Created by nanquan.lin on 2016/8/9 0009.
  * 首页侧滑删除控件
  */
-public class MainPageSwipeLayout extends FrameLayout {
+public class SwipeDeleteLayout extends FrameLayout {
 
     private ViewDragHelper mDragHelper;
     private View mBackView;
@@ -61,7 +61,7 @@ public class MainPageSwipeLayout extends FrameLayout {
 
         @Override
         public void onViewReleased(View releasedChild, float xvel, float yvel) {
-            mOnDragStateChangeListener.onViewReleased(MainPageSwipeLayout.this);
+            mOnDragStateChangeListener.onViewReleased(SwipeDeleteLayout.this);
             if (xvel == 0.0f && mFrontView.getLeft() < -mBackWidth * 0.5f) {
                 open();
             } else if (xvel < 0) {
@@ -98,17 +98,17 @@ public class MainPageSwipeLayout extends FrameLayout {
 
     public interface OnDragStateChangeListener {
 
-        void onPreExecuted(MainPageSwipeLayout layout);
+        void onPreExecuted(SwipeDeleteLayout layout);
 
-        void onClose(MainPageSwipeLayout layout);
+        void onClose(SwipeDeleteLayout layout);
 
-        void onOpen(MainPageSwipeLayout layout);
+        void onOpen(SwipeDeleteLayout layout);
 
         void onDragging();
 
-        void onStartOpen(MainPageSwipeLayout layout);
+        void onStartOpen(SwipeDeleteLayout layout);
 
-        void onViewReleased(MainPageSwipeLayout layout);
+        void onViewReleased(SwipeDeleteLayout layout);
     }
 
     private OnDragStateChangeListener mOnDragStateChangeListener;
@@ -118,15 +118,15 @@ public class MainPageSwipeLayout extends FrameLayout {
         mOnDragStateChangeListener.onPreExecuted(this);
     }
 
-    public MainPageSwipeLayout(Context context) {
+    public SwipeDeleteLayout(Context context) {
         this(context, null);
     }
 
-    public MainPageSwipeLayout(Context context, AttributeSet attrs) {
+    public SwipeDeleteLayout(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public MainPageSwipeLayout(Context context, AttributeSet attrs, int defStyleAttr) {
+    public SwipeDeleteLayout(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         mDragHelper = ViewDragHelper.create(this, mCallback);
     }

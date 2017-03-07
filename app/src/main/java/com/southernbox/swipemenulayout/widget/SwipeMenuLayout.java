@@ -16,7 +16,7 @@ import com.southernbox.swipemenulayout.util.DisplayUtil;
  * 主页侧滑菜单控件
  */
 
-public class SlidingMenuLayout extends FrameLayout {
+public class SwipeMenuLayout extends FrameLayout {
 
     private ViewDragHelper mDragHelper;
     private ViewGroup mLeftContent;
@@ -108,15 +108,15 @@ public class SlidingMenuLayout extends FrameLayout {
         CLOSE, OPEN, DRAGGING
     }
 
-    public SlidingMenuLayout(Context context) {
+    public SwipeMenuLayout(Context context) {
         this(context, null);
     }
 
-    public SlidingMenuLayout(Context context, AttributeSet attrs) {
+    public SwipeMenuLayout(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public SlidingMenuLayout(Context context, AttributeSet attrs, int defStyleAttr) {
+    public SwipeMenuLayout(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         mDragHelper = ViewDragHelper.create(this, mCallback);
     }
