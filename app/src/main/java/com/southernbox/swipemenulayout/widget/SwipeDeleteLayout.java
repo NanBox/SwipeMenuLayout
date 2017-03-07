@@ -2,6 +2,7 @@ package com.southernbox.swipemenulayout.widget;
 
 import android.content.Context;
 import android.graphics.Rect;
+import android.support.annotation.Nullable;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.widget.ViewDragHelper;
 import android.util.AttributeSet;
@@ -88,17 +89,7 @@ public class SwipeDeleteLayout extends FrameLayout {
 
     private State mState = State.CLOSE;
 
-    public void setState(State state) {
-        mState = state;
-    }
-
-    public State getState() {
-        return mState;
-    }
-
     public interface OnDragStateChangeListener {
-
-        void onPreExecuted(SwipeDeleteLayout layout);
 
         void onClose(SwipeDeleteLayout layout);
 
@@ -115,7 +106,7 @@ public class SwipeDeleteLayout extends FrameLayout {
 
     public void setOnDragStateChangeListener(OnDragStateChangeListener onDragStateChangeListener) {
         mOnDragStateChangeListener = onDragStateChangeListener;
-        mOnDragStateChangeListener.onPreExecuted(this);
+        close(false);
     }
 
     public SwipeDeleteLayout(Context context) {
@@ -226,6 +217,7 @@ public class SwipeDeleteLayout extends FrameLayout {
     }
 
     public void close(boolean isSmooth) {
+        mDragHelper.cancel();
         if (isSmooth) {
             mDragHelper.smoothSlideViewTo(mFrontView, 0, 0);
             invalidate();

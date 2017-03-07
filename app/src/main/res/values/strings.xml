@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">SwipeMenuLayout</string>
+    <string name="delete">删除</string>
 </resources>

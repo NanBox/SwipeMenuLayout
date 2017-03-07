@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.southernbox.swipemenulayout.widget.SwipeDeleteLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/swipe_delete_layout"
+    android:layout_width="match_parent"
+    android:layout_height="60dp">
+
+    <TextView
+        android:id="@+id/tv_delete"
+        android:layout_width="67dp"
+        android:layout_height="match_parent"
+        android:background="@color/red"
+        android:gravity="center"
+        android:text="@string/delete"
+        android:textColor="@color/white"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorBackground"
+        android:gravity="center_vertical"
+        android:paddingEnd="20dp"
+        android:paddingStart="20dp"
+        android:textSize="20sp" />
+
+</com.southernbox.swipemenulayout.widget.SwipeDeleteLayout>

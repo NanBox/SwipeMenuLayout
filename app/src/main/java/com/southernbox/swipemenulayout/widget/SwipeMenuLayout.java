@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
+import com.southernbox.swipemenulayout.adapter.MainAdapter;
 import com.southernbox.swipemenulayout.util.DisplayUtil;
 
 /**
@@ -136,22 +137,32 @@ public class SwipeMenuLayout extends FrameLayout {
 
         if (getStatus() == State.CLOSE) {
             switch (ev.getAction()) {
-                case MotionEvent.ACTION_DOWN:
+                case MotionEvent.ACTION_DOWN: {
                     mDownX = ev.getRawX();
                     mDownY = ev.getRawY();
-                    break;
-                case MotionEvent.ACTION_MOVE:
+                }
+                break;
+                case MotionEvent.ACTION_MOVE: {
                     //如果是向左滑，不拦截
                     //MainPage打开的item个数大于0，不拦截
                     //竖直滑动距离大于横向滑动距离，不拦截
                     float deltaX = ev.getRawX() - mDownX;
                     float deltaY = ev.getRawY() - mDownY;
-                    if (deltaX < 0
-//                            || MainPageDataAdapter.mOpenItems.size() > 0
-                            || Math.abs(deltaY / deltaX) > 1) {
+                    if (deltaX < 0 ||
+                            MainAdapter.mOpenItems.size() > 0 ||
+                            Math.abs(deltaY / deltaX) > 1) {
                         return false;
                     }
-                    break;
+                }
+                break;
+//                case MotionEvent.ACTION_UP: {
+//                    float deltaX = ev.getRawX() - mDownX;
+//                    if (deltaX > 0 &&
+//                            MainAdapter.mOpenItems.size() > 0) {
+//                        MainAdapter.closeAll();
+//                    }
+//                }
+//                break;
             }
         } else if (getStatus() == State.OPEN) {
             //完全展开时并且点到主页面，拦截并关闭菜单
