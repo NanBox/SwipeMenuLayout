@@ -29,23 +29,20 @@ public class MainRecyclerView extends RecyclerView {
 
     float mDownX;
     float mDownY;
-    boolean isScrollHorizontal;
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent e) {
         switch (e.getAction()) {
             case MotionEvent.ACTION_DOWN:
-                isScrollHorizontal = false;
                 mDownX = e.getRawX();
                 mDownY = e.getRawY();
                 break;
             case MotionEvent.ACTION_MOVE:
-                //横向滑动时不拦截事件
+                //竖向滑动时拦截事件
                 float deltaX = Math.abs(e.getRawX() - mDownX);
                 float deltaY = Math.abs(e.getRawY() - mDownY);
-                if (isScrollHorizontal || Math.abs(deltaX / deltaY) > 1) {
-                    isScrollHorizontal = true;
-                    return false;
+                if (Math.abs(deltaY / deltaX) > 1) {
+                    return true;
                 }
                 break;
         }
@@ -55,7 +52,6 @@ public class MainRecyclerView extends RecyclerView {
     @Override
     public boolean onTouchEvent(MotionEvent e) {
         if (MainAdapter.mOpenItems.size() > 0) {
-            MainAdapter.closeAll();
             return false;
         }
         return super.onTouchEvent(e);

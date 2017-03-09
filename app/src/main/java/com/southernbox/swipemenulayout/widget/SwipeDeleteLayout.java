@@ -145,15 +145,24 @@ public class SwipeDeleteLayout extends FrameLayout {
 
         //展开状态下，点击左侧部分将其关闭
         switch (event.getAction()) {
-            case MotionEvent.ACTION_DOWN: {
+            case MotionEvent.ACTION_DOWN:
                 isOpen = mState == State.OPEN;
-            }
-            case MotionEvent.ACTION_UP: {
-                if (isOpen && mState == State.OPEN && event.getRawX() <= mWidth - mBackWidth) {
+                break;
+            case MotionEvent.ACTION_MOVE:
+                //通知父控件不再拦截事件
+                requestDisallowInterceptTouchEvent(true);
+                break;
+            case MotionEvent.ACTION_CANCEL:
+                requestDisallowInterceptTouchEvent(false);
+                break;
+            case MotionEvent.ACTION_UP:
+                requestDisallowInterceptTouchEvent(false);
+                if (isOpen && mState == State.OPEN &&
+                        event.getRawX() <= mWidth - mBackWidth) {
                     close();
                     return true;
                 }
-            }
+                break;
         }
 
         mDragHelper.processTouchEvent(event);
