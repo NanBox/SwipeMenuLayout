@@ -171,6 +171,10 @@ public class SwipeMenuLayout extends FrameLayout {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+        if (MainAdapter.mOpenItems.size() > 0) {
+            MainAdapter.closeAll();
+            return false;
+        }
         mDragHelper.processTouchEvent(event);
         return true;
     }

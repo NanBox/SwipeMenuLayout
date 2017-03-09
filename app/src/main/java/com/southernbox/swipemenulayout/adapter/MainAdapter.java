@@ -52,6 +52,9 @@ public class MainAdapter extends RecyclerView.Adapter {
             public void onClick(View v) {
                 int position = holder.getAdapterPosition();
                 mList.remove(position);
+                if (mOpenItems.contains(layout)) {
+                    mOpenItems.remove(layout);
+                }
                 notifyItemRemoved(position);
                 if (position != mList.size()) {
                     notifyItemRangeChanged(position, mList.size() - position);
@@ -105,16 +108,12 @@ public class MainAdapter extends RecyclerView.Adapter {
         for (SwipeDeleteLayout layout : mOpenItems) {
             layout.close();
         }
-        mOpenItems.clear();
     }
 
     private void closeAll(SwipeDeleteLayout unCloseLayout) {
         for (SwipeDeleteLayout layout : mOpenItems) {
             if (layout != unCloseLayout) {
                 layout.close();
-                if (mOpenItems.contains(layout)) {
-                    mOpenItems.remove(layout);
-                }
             }
         }
     }
