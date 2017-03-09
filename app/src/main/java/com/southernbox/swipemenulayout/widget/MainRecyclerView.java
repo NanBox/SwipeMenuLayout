@@ -43,7 +43,7 @@ public class MainRecyclerView extends RecyclerView {
                 //横向滑动时不拦截事件
                 float deltaX = Math.abs(e.getRawX() - mDownX);
                 float deltaY = Math.abs(e.getRawY() - mDownY);
-                if (isScrollHorizontal || deltaX / deltaY > 1) {
+                if (isScrollHorizontal || Math.abs(deltaX / deltaY) > 1) {
                     isScrollHorizontal = true;
                     return false;
                 }

@@ -138,6 +138,7 @@ public class SwipeDeleteLayout extends FrameLayout {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+        //存在已展开的控件且当前控件为关闭状态，则将所有展开控件关闭
         if (MainAdapter.mOpenItems.size() > 0 && mState == State.CLOSE) {
             return false;
         }
