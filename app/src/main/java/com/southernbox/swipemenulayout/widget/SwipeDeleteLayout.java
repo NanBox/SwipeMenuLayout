@@ -134,11 +134,27 @@ public class SwipeDeleteLayout extends FrameLayout {
         return mDragHelper.shouldInterceptTouchEvent(ev);
     }
 
+    private boolean isOpen;
+
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         if (MainAdapter.mOpenItems.size() > 0 && mState == State.CLOSE) {
             return false;
         }
+
+        //展开状态下，点击左侧部分将其关闭
+        switch (event.getAction()) {
+            case MotionEvent.ACTION_DOWN: {
+                isOpen = mState == State.OPEN;
+            }
+            case MotionEvent.ACTION_UP: {
+                if (isOpen && mState == State.OPEN && event.getRawX() <= mWidth - mBackWidth) {
+                    close();
+                    return true;
+                }
+            }
+        }
+
         mDragHelper.processTouchEvent(event);
         return true;
     }
