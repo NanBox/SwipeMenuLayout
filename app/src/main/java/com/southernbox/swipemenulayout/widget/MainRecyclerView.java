@@ -39,8 +39,8 @@ public class MainRecyclerView extends RecyclerView {
                 break;
             case MotionEvent.ACTION_MOVE:
                 //竖向滑动时拦截事件
-                float deltaX = Math.abs(e.getRawX() - mDownX);
-                float deltaY = Math.abs(e.getRawY() - mDownY);
+                float deltaX = e.getRawX() - mDownX;
+                float deltaY = e.getRawY() - mDownY;
                 if (Math.abs(deltaY / deltaX) > 1) {
                     return true;
                 }

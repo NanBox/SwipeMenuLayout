@@ -145,6 +145,13 @@ public class SwipeMenuLayout extends FrameLayout {
                             Math.abs(deltaY / deltaX) > 1) {
                         return false;
                     }
+
+                    //向右滑动且列表没有展开项且横向滑动距离比竖向滑动距离大，则拦截
+                    if (deltaX > 0 &&
+                            MainAdapter.mOpenItems.size() == 0 &&
+                            Math.abs(deltaY / deltaX) < 1) {
+                        return true;
+                    }
                 }
                 break;
             }
