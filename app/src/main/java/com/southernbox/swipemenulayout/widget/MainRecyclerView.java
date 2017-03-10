@@ -41,9 +41,14 @@ public class MainRecyclerView extends RecyclerView {
                 //竖向滑动时拦截事件
                 float deltaX = e.getRawX() - mDownX;
                 float deltaY = e.getRawY() - mDownY;
-                if (Math.abs(deltaY / deltaX) > 1) {
+                if (deltaY != 0.0 &&
+                        Math.abs(deltaX / deltaY) < 1) {
                     return true;
                 }
+                break;
+            case MotionEvent.ACTION_CANCEL:
+                break;
+            case MotionEvent.ACTION_UP:
                 break;
         }
         return super.onInterceptTouchEvent(e);

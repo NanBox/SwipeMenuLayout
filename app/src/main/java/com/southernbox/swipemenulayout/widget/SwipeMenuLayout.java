@@ -34,13 +34,6 @@ public class SwipeMenuLayout extends FrameLayout {
      */
     private int mRange = DisplayUtil.getPx(getContext(), 305);
 
-    /**
-     * 时间相关
-     */
-    private long lastRefreshTime;
-    //触发刷新的时间间隔
-    private static final long delayTime = 10 * 1000;
-
     ViewDragHelper.Callback mCallback = new ViewDragHelper.Callback() {
 
         @Override
@@ -135,22 +128,23 @@ public class SwipeMenuLayout extends FrameLayout {
                 }
                 break;
                 case MotionEvent.ACTION_MOVE: {
-                    //如果是向左滑，不拦截
-                    //MainPage打开的item个数大于0，不拦截
-                    //竖直滑动距离大于横向滑动距离，不拦截
                     float deltaX = ev.getRawX() - mDownX;
                     float deltaY = ev.getRawY() - mDownY;
-                    if (deltaX < 0 ||
-                            MainAdapter.mOpenItems.size() > 0 ||
-                            Math.abs(deltaY / deltaX) > 1) {
-                        return false;
-                    }
 
                     //向右滑动且列表没有展开项且横向滑动距离比竖向滑动距离大，则拦截
                     if (deltaX > 0 &&
                             MainAdapter.mOpenItems.size() == 0 &&
                             Math.abs(deltaY / deltaX) < 1) {
                         return true;
+                    }
+
+                    //如果是向左滑，不拦截
+                    //MainPage打开的item个数大于0，不拦截
+                    //竖直滑动距离大于横向滑动距离，不拦截
+                    if (deltaX < 0 ||
+                            MainAdapter.mOpenItems.size() > 0 ||
+                            Math.abs(deltaY / deltaX) > 1) {
+                        return false;
                     }
                 }
                 break;
@@ -218,13 +212,9 @@ public class SwipeMenuLayout extends FrameLayout {
      * @return 当前状态
      */
     private State updateState(int left) {
-        if (left == 0) {
+        if (left <= 0) {
             return State.CLOSE;
-        } else if (left == mRange) {
-            long currentTime = System.currentTimeMillis();
-            if (currentTime - lastRefreshTime > delayTime) {
-                lastRefreshTime = currentTime;
-            }
+        } else if (left >= mRange) {
             return State.OPEN;
         } else {
             return State.DRAGGING;

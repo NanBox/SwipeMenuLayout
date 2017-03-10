@@ -149,7 +149,7 @@ public class SwipeDeleteLayout extends FrameLayout {
                 isOpen = mState == State.OPEN;
                 break;
             case MotionEvent.ACTION_MOVE:
-                //通知父控件不再拦截事件
+                //竖向滑动时不消费
                 requestDisallowInterceptTouchEvent(true);
                 break;
             case MotionEvent.ACTION_CANCEL:
