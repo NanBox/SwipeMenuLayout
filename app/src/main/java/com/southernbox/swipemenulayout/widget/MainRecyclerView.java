@@ -46,10 +46,6 @@ public class MainRecyclerView extends RecyclerView {
                     return true;
                 }
                 break;
-            case MotionEvent.ACTION_CANCEL:
-                break;
-            case MotionEvent.ACTION_UP:
-                break;
         }
         return super.onInterceptTouchEvent(e);
     }
