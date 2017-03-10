@@ -13,8 +13,8 @@ import com.southernbox.swipemenulayout.adapter.MainAdapter;
 import com.southernbox.swipemenulayout.util.DisplayUtil;
 
 /**
- * Created by nanquan.lin on 2016/11/21 0021.
- * 主页侧滑菜单控件
+ * Created by SouthernBox on 2016/11/21 0021.
+ * 侧滑菜单控件
  */
 
 public class SwipeMenuLayout extends FrameLayout {
@@ -115,8 +115,8 @@ public class SwipeMenuLayout extends FrameLayout {
         mDragHelper = ViewDragHelper.create(this, mCallback);
     }
 
-    float mDownX;
-    float mDownY;
+    private float mDownX;
+    private float mDownY;
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {

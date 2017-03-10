@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by nanquan.lin on 2017/3/7 0007.
+ * Created by SouthernBox on 2017/3/7 0007.
  * 主页列表适配器
  */
 

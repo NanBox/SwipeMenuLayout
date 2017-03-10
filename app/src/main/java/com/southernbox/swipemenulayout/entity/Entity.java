@@ -2,14 +2,12 @@ package com.southernbox.swipemenulayout.entity;
 
 /**
  * Created by SouthernBox on 2016/10/25 0025.
+ * 实体类
  */
 
 public class Entity {
 
     private String name;
-
-    public Entity() {
-    }
 
     public Entity(String name) {
         this.name = name;
@@ -17,10 +15,6 @@ public class Entity {
 
     public String getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
 }

@@ -1,13 +1,11 @@
 package com.southernbox.swipemenulayout.activity;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.widget.TextView;
 
 import com.southernbox.swipemenulayout.R;
 import com.southernbox.swipemenulayout.adapter.MainAdapter;
@@ -16,27 +14,27 @@ import com.southernbox.swipemenulayout.entity.Entity;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Created by SouthernBox on 2017/3/10 0025.
+ * 主页
+ */
+
 public class MainActivity extends AppCompatActivity {
 
-    private Context mContext;
-    private RecyclerView mRecyclerView;
     private MainAdapter mAdapter;
     private List<Entity> mList = new ArrayList<>();
-    private LinearLayoutManager layoutManager;
-    private TextView tvEdit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mContext = this;
         initView();
         initData();
     }
 
     private void initView() {
-        mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-        layoutManager = new LinearLayoutManager(this);
+        RecyclerView mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(layoutManager);
         mAdapter = new MainAdapter(this, mList);
         mRecyclerView.setAdapter(mAdapter);

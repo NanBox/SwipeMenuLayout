@@ -9,26 +9,26 @@ import android.view.MotionEvent;
 import com.southernbox.swipemenulayout.adapter.MainAdapter;
 
 /**
- * Created by nanquan.lin on 2016/11/30 0030.
- * 自定义RecyclerView，首页侧滑时，列表不可上下滑
+ * Created by SouthernBox on 2016/11/30 0030.
+ * 自定义RecyclerView
  */
 
-public class MainRecyclerView extends RecyclerView {
+public class MyRecyclerView extends RecyclerView {
 
-    public MainRecyclerView(Context context) {
+    public MyRecyclerView(Context context) {
         this(context, null);
     }
 
-    public MainRecyclerView(Context context, @Nullable AttributeSet attrs) {
+    public MyRecyclerView(Context context, @Nullable AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public MainRecyclerView(Context context, @Nullable AttributeSet attrs, int defStyle) {
+    public MyRecyclerView(Context context, @Nullable AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
     }
 
-    float mDownX;
-    float mDownY;
+    private float mDownX;
+    private float mDownY;
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent e) {
@@ -52,9 +52,6 @@ public class MainRecyclerView extends RecyclerView {
 
     @Override
     public boolean onTouchEvent(MotionEvent e) {
-        if (MainAdapter.mOpenItems.size() > 0) {
-            return false;
-        }
-        return super.onTouchEvent(e);
+        return MainAdapter.mOpenItems.size() == 0 && super.onTouchEvent(e);
     }
 }

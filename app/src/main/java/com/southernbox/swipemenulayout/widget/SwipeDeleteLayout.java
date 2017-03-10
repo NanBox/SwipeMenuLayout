@@ -12,8 +12,8 @@ import android.widget.FrameLayout;
 import com.southernbox.swipemenulayout.adapter.MainAdapter;
 
 /**
- * Created by nanquan.lin on 2016/8/9 0009.
- * 首页侧滑删除控件
+ * Created by SouthernBox on 2016/8/9 0009.
+ * 侧滑删除控件
  */
 public class SwipeDeleteLayout extends FrameLayout {
 
@@ -192,7 +192,7 @@ public class SwipeDeleteLayout extends FrameLayout {
         }
     }
 
-    protected void dispatchDragState(int left) {
+    private void dispatchDragState(int left) {
         State preState = mState;
         mState = updateState(left);
         if (mOnDragStateChangeListener == null) {
