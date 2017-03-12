@@ -247,8 +247,8 @@ public class SwipeDeleteLayout extends FrameLayout {
     }
 
     public void close(boolean isSmooth) {
-        if (mDragHelper.getViewDragState() == ViewDragHelper.STATE_IDLE) {
-            //处于没滑动的状态
+        if (mDragHelper.getViewDragState() != ViewDragHelper.STATE_SETTLING) {
+            //不是惯性滑动的状态
             if (isSmooth) {
                 mDragHelper.smoothSlideViewTo(mFrontView, 0, 0);
                 ViewCompat.postInvalidateOnAnimation(this);
