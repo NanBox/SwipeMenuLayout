@@ -120,7 +120,7 @@ public class SwipeMenuLayout extends FrameLayout {
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
-        if (getStatus() == State.CLOSE) {
+        if (mState == State.CLOSE) {
             switch (ev.getAction()) {
                 case MotionEvent.ACTION_DOWN: {
                     mDownX = ev.getRawX();
@@ -138,18 +138,16 @@ public class SwipeMenuLayout extends FrameLayout {
                         return true;
                     }
 
-                    //如果是向左滑，不拦截
+                    //如果是向左滑，且竖直滑动距离大于横向滑动距离，不拦截
                     //MainPage打开的item个数大于0，不拦截
-                    //竖直滑动距离大于横向滑动距离，不拦截
-                    if (deltaX < 0 ||
-                            MainAdapter.mOpenItems.size() > 0 ||
-                            Math.abs(deltaY / deltaX) > 1) {
+                    if ((deltaX < 0 && Math.abs(deltaY / deltaX) > 1) ||
+                            MainAdapter.mOpenItems.size() > 0) {
                         return false;
                     }
                 }
                 break;
             }
-        } else if (getStatus() == State.OPEN) {
+        } else if (mState == State.OPEN) {
             //完全展开时并且点到主页面，拦截并关闭菜单
             if (mMainContent.getLeft() <= mRange && ev.getRawX() > mRange) {
                 return true;
@@ -219,10 +217,6 @@ public class SwipeMenuLayout extends FrameLayout {
         } else {
             return State.DRAGGING;
         }
-    }
-
-    public State getStatus() {
-        return mState;
     }
 
     public void open() {
