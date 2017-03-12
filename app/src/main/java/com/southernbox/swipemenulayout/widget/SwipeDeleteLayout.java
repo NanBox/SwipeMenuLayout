@@ -134,34 +134,40 @@ public class SwipeDeleteLayout extends FrameLayout {
         return mDragHelper.shouldInterceptTouchEvent(ev);
     }
 
-    private boolean isOpen;
+    private float mDownX;
+    private boolean isDrag;
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         //存在已展开的控件且当前控件为关闭状态，则将所有展开控件关闭
         if (MainAdapter.mOpenItems.size() > 0 && mState == State.CLOSE) {
-            return false;
+            MainAdapter.closeAll();
+            return true;
         }
 
-        //展开状态下，点击左侧部分将其关闭
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
-                isOpen = mState == State.OPEN;
+                mDownX = event.getRawX();
                 break;
             case MotionEvent.ACTION_MOVE:
-                //竖向滑动时不消费
                 requestDisallowInterceptTouchEvent(true);
+                float deltaX = event.getRawX() - mDownX;
+                if (Math.abs(deltaX) > 50) {
+                    isDrag = true;
+                }
                 break;
             case MotionEvent.ACTION_CANCEL:
                 requestDisallowInterceptTouchEvent(false);
                 break;
             case MotionEvent.ACTION_UP:
                 requestDisallowInterceptTouchEvent(false);
-                if (isOpen && mState == State.OPEN &&
+                if (!isDrag &&
                         event.getRawX() <= mWidth - mBackWidth) {
+                    //展开状态下，点击左侧部分将其关闭
                     close();
                     return true;
                 }
+                isDrag = false;
                 break;
         }
 
@@ -241,12 +247,14 @@ public class SwipeDeleteLayout extends FrameLayout {
     }
 
     public void close(boolean isSmooth) {
-        mDragHelper.cancel();
-        if (isSmooth) {
-            mDragHelper.smoothSlideViewTo(mFrontView, 0, 0);
-            invalidate();
-        } else {
-            layoutContent(State.CLOSE);
+        if (mDragHelper.getViewDragState() == ViewDragHelper.STATE_IDLE) {
+            //处于没滑动的状态
+            if (isSmooth) {
+                mDragHelper.smoothSlideViewTo(mFrontView, 0, 0);
+                ViewCompat.postInvalidateOnAnimation(this);
+            } else {
+                layoutContent(State.CLOSE);
+            }
         }
     }
 
