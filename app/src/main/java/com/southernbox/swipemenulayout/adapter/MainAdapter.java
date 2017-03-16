@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.southernbox.swipemenulayout.R;
-import com.southernbox.swipemenulayout.entity.Entity;
 import com.southernbox.swipemenulayout.widget.SwipeDeleteLayout;
 
 import java.util.ArrayList;
@@ -22,13 +21,13 @@ import java.util.List;
 public class MainAdapter extends RecyclerView.Adapter {
 
     private Context mContext;
-    private List<Entity> mList;
+    private List<String> mList;
 
     public static ArrayList<SwipeDeleteLayout> mOpenItems = new ArrayList<>();
 
-    public MainAdapter(Context context, List<Entity> List) {
+    public MainAdapter(Context context, List<String> mList) {
         this.mContext = context;
-        this.mList = List;
+        this.mList = mList;
     }
 
     @Override
@@ -45,7 +44,7 @@ public class MainAdapter extends RecyclerView.Adapter {
 
         layout.close(false);
 
-        viewHolder.tvName.setText(mList.get(position).getName());
+        viewHolder.tvName.setText(mList.get(position));
 
         viewHolder.vDelete.setOnClickListener(new View.OnClickListener() {
             @Override
