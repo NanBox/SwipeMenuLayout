@@ -1,5 +1,6 @@
 package com.southernbox.swipemenulayout.widget;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.widget.ViewDragHelper;
@@ -169,6 +170,7 @@ public class SwipeMenuLayout extends FrameLayout {
     }
 
     @Override
+    @SuppressLint("ClickableViewAccessibility")
     public boolean onTouchEvent(MotionEvent event) {
         if (MainAdapter.mOpenItems.size() > 0) {
             MainAdapter.closeAll();

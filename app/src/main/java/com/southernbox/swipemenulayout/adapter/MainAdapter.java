@@ -125,8 +125,8 @@ public class MainAdapter extends RecyclerView.Adapter {
 
         ViewHolder(View itemView) {
             super(itemView);
-            swipeDeleteLayout = (SwipeDeleteLayout) itemView.findViewById(R.id.swipe_delete_layout);
-            tvName = (TextView) itemView.findViewById(R.id.tv_name);
+            swipeDeleteLayout = itemView.findViewById(R.id.swipe_delete_layout);
+            tvName = itemView.findViewById(R.id.tv_name);
             vDelete = itemView.findViewById(R.id.tv_delete);
         }
     }

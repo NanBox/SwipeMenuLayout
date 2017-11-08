@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initView() {
-        RecyclerView mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        RecyclerView mRecyclerView = findViewById(R.id.recycler_view);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(layoutManager);
         String[] names = getResources().getStringArray(R.array.query_suggestions);
